@@ -1,53 +1,51 @@
 version: 2
+
+multi-ecosystem-groups:
+  all-dependencies:
+    schedule:
+      interval: "weekly"
+    labels:
+      - "T-chore"
+      - "A-deps"
+
 updates:
   - package-ecosystem: "npm"
-    directory: "/web/"
-    versioning-strategy: increase
-    schedule:
-      interval: "weekly"
+    directory: "/web"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "all-dependencies"
     groups:
-      npm-minor:
+      all-security-updates:
+        applies-to: security-updates
         patterns:
           - "*"
-        update-types:
-          - "minor"
-          - "patch"
+    versioning-strategy: increase
     labels:
       - "T-chore"
       - "A-deps"
-
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    labels:
-      - "T-chore"
-      - "A-deps"
-
   - package-ecosystem: "cargo"
     directory: "/"
-    schedule:
-      interval: "weekly"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "all-dependencies"
     groups:
-      winit-wgpu-egui:
-        patterns:
-        - "winit"
-        - "wgpu"
-        - "naga"
-        - "egui*"
-        - "raw-window-handle"
-      wasm-bindgen:
-        patterns:
-        - "wasm-bindgen"
-        - "js-sys"
-        - "web-sys"
-        - "wasm-bindgen-futures"
-      cargo-minor:
+      all-security-updates:
+        applies-to: security-updates
         patterns:
           - "*"
-        update-types:
-          - "minor"
-          - "patch"
+    labels:
+      - "T-chore"
+      - "A-deps"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "all-dependencies"
+    groups:
+      all-security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
     labels:
       - "T-chore"
       - "A-deps"
