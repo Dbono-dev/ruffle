@@ -23,6 +23,19 @@ updates:
     labels:
       - "T-chore"
       - "A-deps"
+  - package-ecosystem: "docker"
+    directory: "/web/docker"
+    patterns:
+      - "*"
+    multi-ecosystem-group: "all-dependencies"
+    groups:
+      all-security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
+    labels:
+      - "T-chore"
+      - "A-deps"
   - package-ecosystem: "cargo"
     directory: "/"
     patterns:
